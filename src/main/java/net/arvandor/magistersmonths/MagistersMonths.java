@@ -4,6 +4,7 @@ import net.arvandor.magistersmonths.command.DateCommand;
 import net.arvandor.magistersmonths.datetime.MmCalendar;
 import net.arvandor.magistersmonths.datetime.MmDateTime;
 import net.arvandor.magistersmonths.datetime.MmMonth;
+import net.arvandor.magistersmonths.placeholder.MmPlaceholderExpansion;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,6 +44,10 @@ public class MagistersMonths extends JavaPlugin {
 
         getCommand("date").setExecutor(new DateCommand(this));
 
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new MmPlaceholderExpansion(this).register();
+        }
+
         getConfig().getStringList("worlds").forEach(worldName -> {
             World world = getServer().getWorld(worldName);
             if (world != null) {
@@ -56,7 +61,7 @@ public class MagistersMonths extends JavaPlugin {
         double nightLengthSeconds = ((double) nightLength.getSeconds() / (double) fullDayLength.getSeconds()) * (24.0 * 60.0 * 60.0);
 
         getServer().getScheduler().runTaskTimer(this, () -> {
-            MmDateTime currentTime = calendar.toCustomDateTime(Instant.now());
+            MmDateTime currentTime = calendar.toMmDateTime(Instant.now());
             int hour = currentTime.getHour();
             int minute = currentTime.getMinutes();
             int second = currentTime.getSeconds();

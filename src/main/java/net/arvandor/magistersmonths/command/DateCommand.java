@@ -21,7 +21,7 @@ public class DateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         MmCalendar calendar = plugin.getCalendar();
-        MmDateTime gameTime = calendar.toCustomDateTime(Instant.now());
+        MmDateTime gameTime = calendar.toMmDateTime(Instant.now());
         MmMonth month = calendar.getMonthAt(gameTime.getDayOfYear());
         int dayOfMonth = month != null ? (gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) : 0;
         sender.sendMessage("Date: " + (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " + gameTime.getYear() + " " + gameTime.getHour() + ":" + gameTime.getMinutes() + ":" + gameTime.getSeconds());

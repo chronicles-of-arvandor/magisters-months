@@ -41,13 +41,13 @@ public class MmCalendar {
                 .orElse(null);
     }
 
-    public MmDateTime toCustomDateTime(Instant instant) {
+    public MmDateTime toMmDateTime(Instant instant) {
         Duration timeSinceEpochRealTime = Duration.between(epochRealTime, instant);
-        MmDuration timeSinceEpochGameTime = toCustomDuration(timeSinceEpochRealTime);
+        MmDuration timeSinceEpochGameTime = toMmDuration(timeSinceEpochRealTime);
         return epochInGameTime.plus(timeSinceEpochGameTime);
     }
 
-    private MmDuration toCustomDuration(Duration duration) {
+    private MmDuration toMmDuration(Duration duration) {
         long seconds = Math.round(duration.toSeconds() * getTimeScale());
         return new MmDuration(seconds);
     }
