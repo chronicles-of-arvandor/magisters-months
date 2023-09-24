@@ -29,8 +29,8 @@ public class DateCommand implements CommandExecutor {
                 (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " +
                 gameTime.getYear() + " " +
                 gameTime.getHour() + ":" +
-                String.format("%02f", gameTime.getMinutes()) + ":" +
-                String.format("%02f", gameTime.getSeconds()));
+                String.format("%02d", gameTime.getMinutes()) + ":" +
+                String.format("%02d", gameTime.getSeconds()));
         return true;
     }
 
