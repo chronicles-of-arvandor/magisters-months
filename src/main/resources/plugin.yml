@@ -1,0 +1,9 @@
+name: magisters-months
+author: Ren
+version: 0.1.0-SNAPSHOT
+main: net.arvandor.magistersmonths.MagistersMonths
+api-version: 1.19
+commands:
+  date:
+    description: Displays the current date and time.
+    usage: /<command>

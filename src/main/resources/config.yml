@@ -1,0 +1,67 @@
+months:
+  Hammer:
+    start: 1
+    end: 30
+  Midwinter:
+    start: 31
+    end: 31
+  Alturiak:
+    start: 32
+    end: 61
+  Ches:
+    start: 62
+    end: 91
+  Tarsakh:
+    start: 92
+    end: 121
+  Greengrass:
+    start: 122
+    end: 122
+  Mirtul:
+    start: 123
+    end: 152
+  Kythorn:
+    start: 153
+    end: 182
+  Flamerule:
+    start: 183
+    end: 212
+  Midsummer:
+    start: 213
+    end: 213
+  Eleasis:
+    start: 214
+    end: 243
+  Eleint:
+    start: 244
+    end: 273
+  Highharvestide:
+    start: 274
+    end: 274
+  Marpenoth:
+    start: 275
+    end: 304
+  Uktar:
+    start: 305
+    end: 334
+  Feast of the Moon:
+    start: 335
+    end: 335
+  Nightal:
+    start: 336
+    end: 365
+
+epoch:
+  real-time: '2023-01-01T00:00:00Z'
+  custom-time:
+    year: 1398
+    day: 1
+    hour: 0
+    minute: 0
+    second: 0
+
+day-length: PT5H30M
+night-length: PT2H30M
+
+worlds:
+  - world
