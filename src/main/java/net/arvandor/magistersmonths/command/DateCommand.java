@@ -4,6 +4,7 @@ import net.arvandor.magistersmonths.MagistersMonths;
 import net.arvandor.magistersmonths.datetime.MmCalendar;
 import net.arvandor.magistersmonths.datetime.MmDateTime;
 import net.arvandor.magistersmonths.datetime.MmMonth;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,7 +25,12 @@ public class DateCommand implements CommandExecutor {
         MmDateTime gameTime = calendar.toMmDateTime(Instant.now());
         MmMonth month = calendar.getMonthAt(gameTime.getDayOfYear());
         int dayOfMonth = month != null ? (gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) : 0;
-        sender.sendMessage("Date: " + (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " + gameTime.getYear() + " " + gameTime.getHour() + ":" + gameTime.getMinutes() + ":" + gameTime.getSeconds());
+        sender.sendMessage(ChatColor.GOLD + "Date: " +
+                (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " +
+                gameTime.getYear() + " " +
+                gameTime.getHour() + ":" +
+                String.format("%02f", gameTime.getMinutes()) + ":" +
+                String.format("%02f", gameTime.getSeconds()));
         return true;
     }
 
