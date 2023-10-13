@@ -74,12 +74,32 @@ public class MmDateTime {
     public static MmDateTime fromSeconds(MmDateTime epoch, long seconds) {
         int yearsSinceEpoch = (int) (seconds / SECONDS_PER_YEAR);
         int remainingSeconds = (int) (seconds % SECONDS_PER_YEAR);
+
+        if (remainingSeconds < 0) {
+            yearsSinceEpoch--;
+            remainingSeconds += SECONDS_PER_YEAR;
+        }
+
         int daysOfYearSinceEpoch = remainingSeconds / SECONDS_PER_DAY;
-        remainingSeconds = remainingSeconds % SECONDS_PER_DAY;
+        remainingSeconds %= SECONDS_PER_DAY;
+        if (remainingSeconds < 0) {
+            daysOfYearSinceEpoch--;
+            remainingSeconds += SECONDS_PER_DAY;
+        }
+
         int hourOfDaySinceEpoch = remainingSeconds / SECONDS_PER_HOUR;
-        remainingSeconds = remainingSeconds % SECONDS_PER_HOUR;
+        remainingSeconds %= SECONDS_PER_HOUR;
+        if (remainingSeconds < 0) {
+            hourOfDaySinceEpoch--;
+            remainingSeconds += SECONDS_PER_HOUR;
+        }
+
         int minuteOfHourSinceEpoch = remainingSeconds / SECONDS_PER_MINUTE;
-        remainingSeconds = remainingSeconds % SECONDS_PER_MINUTE;
+        remainingSeconds %= SECONDS_PER_MINUTE;
+        if (remainingSeconds < 0) {
+            minuteOfHourSinceEpoch--;
+            remainingSeconds += SECONDS_PER_MINUTE;
+        }
 
         return new MmDateTime(
                 epoch,
