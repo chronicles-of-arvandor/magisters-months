@@ -1,16 +1,18 @@
 package net.arvandor.magistersmonths;
 
+import static org.bukkit.GameRule.DO_DAYLIGHT_CYCLE;
+
 import net.arvandor.magistersmonths.command.DateCommand;
 import net.arvandor.magistersmonths.datetime.MmCalendar;
 import net.arvandor.magistersmonths.datetime.MmDateTime;
 import net.arvandor.magistersmonths.datetime.MmMonth;
 import net.arvandor.magistersmonths.placeholder.MmPlaceholderExpansion;
-import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Objects;
 
 public class MagistersMonths extends JavaPlugin {
 
@@ -51,7 +53,7 @@ public class MagistersMonths extends JavaPlugin {
         getConfig().getStringList("worlds").forEach(worldName -> {
             World world = getServer().getWorld(worldName);
             if (world != null) {
-                world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+                world.setGameRule(DO_DAYLIGHT_CYCLE, false);
             } else {
                 getLogger().warning("World " + worldName + " does not exist.");
             }
@@ -80,7 +82,12 @@ public class MagistersMonths extends JavaPlugin {
                 int secondsIntoNight = secondsSinceSunrise - (int) dayLengthSeconds;
                 time = 12000 + (int) ((double) secondsIntoNight / nightLengthSeconds * 12000);
             }
-            getServer().getWorlds().forEach(world -> world.setTime(time));
+            getConfig().getStringList("worlds").stream().map(worldName -> getServer().getWorld(worldName))
+                    .filter(Objects::nonNull)
+                    .forEach(world -> {
+                        world.setGameRule(DO_DAYLIGHT_CYCLE, false); // hack to get around rpk-essentials re-enabling it every time the server starts. remove once fixed there.
+                        world.setTime(time);
+                    });
         }, 100L, 100L);
     }
 

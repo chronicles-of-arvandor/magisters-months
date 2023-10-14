@@ -39,7 +39,7 @@ public class MmPlaceholderExpansion extends PlaceholderExpansion {
         MmCalendar calendar = plugin.getCalendar();
         MmDateTime gameTime = calendar.toMmDateTime(Instant.now());
         MmMonth month = calendar.getMonthAt(gameTime.getDayOfYear());
-        int dayOfMonth = month != null ? (gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) : 0;
+        int dayOfMonth = month != null ? (gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) + 1 : 0;
         if (params.equalsIgnoreCase("date")) {
             return (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " + gameTime.getYear();
         } else if (params.equalsIgnoreCase("time")) {
