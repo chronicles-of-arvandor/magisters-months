@@ -24,7 +24,7 @@ public class DateCommand implements CommandExecutor {
         MmCalendar calendar = plugin.getCalendar();
         MmDateTime gameTime = calendar.toMmDateTime(Instant.now());
         MmMonth month = calendar.getMonthAt(gameTime.getDayOfYear());
-        int dayOfMonth = month != null ? (gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) : 0;
+        int dayOfMonth = month != null ? ((gameTime.getDayOfYear() - calendar.getMonthAt(gameTime.getDayOfYear()).getStartDay()) + 1) : 0;
         sender.sendMessage(ChatColor.GOLD + "Date: " +
                 (month != null ? (dayOfMonth + " " + month.getName()) : gameTime.getDayOfYear()) + " " +
                 gameTime.getYear() + " " +
