@@ -5,7 +5,6 @@ import static org.bukkit.GameRule.DO_DAYLIGHT_CYCLE;
 import net.arvandor.magistersmonths.command.DateCommand;
 import net.arvandor.magistersmonths.datetime.MmCalendar;
 import net.arvandor.magistersmonths.datetime.MmDateTime;
-import net.arvandor.magistersmonths.datetime.MmMonth;
 import net.arvandor.magistersmonths.placeholder.MmPlaceholderExpansion;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,22 +26,7 @@ public class MagistersMonths extends JavaPlugin {
         Duration fullDayLength = dayLength.plus(nightLength);
         int sunriseHour = 6;
 
-        calendar = new MmCalendar(
-                Instant.parse(getConfig().getString("epoch.real-time")),
-                MmDateTime.epoch(
-                        getConfig().getInt("epoch.custom-time.year"),
-                        getConfig().getInt("epoch.custom-time.day"),
-                        getConfig().getInt("epoch.custom-time.hour"),
-                        getConfig().getInt("epoch.custom-time.minute"),
-                        getConfig().getInt("epoch.custom-time.second")
-                ),
-                fullDayLength,
-                getConfig().getConfigurationSection("months").getKeys(false).stream().map(key -> new MmMonth(
-                        key,
-                        getConfig().getInt("months." + key + ".start"),
-                        getConfig().getInt("months." + key + ".end")
-                )).toList()
-        );
+        calendar = new MmCalendar(this);
 
         getCommand("date").setExecutor(new DateCommand(this));
 
