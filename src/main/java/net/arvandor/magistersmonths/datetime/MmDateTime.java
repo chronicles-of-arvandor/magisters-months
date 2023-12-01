@@ -9,7 +9,7 @@ public class MmDateTime {
     private static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
     private static final int HOURS_PER_DAY = 24;
     private static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
-    private static final int DAYS_PER_YEAR = 375;
+    private static final int DAYS_PER_YEAR = 365;
     private static final int SECONDS_PER_YEAR = SECONDS_PER_DAY * DAYS_PER_YEAR;
 
     private final MmCalendar calendar;
