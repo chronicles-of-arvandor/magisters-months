@@ -48,8 +48,7 @@ public class MmDateTime {
         return seconds;
     }
 
-    public int toSeconds() {
-        int yearsAsSeconds = (getYear() - calendar.getEpochInGameTime().getYear()) * SECONDS_PER_YEAR;
+    public int toSeconds() {int yearsAsSeconds = (getYear() - calendar.getEpochInGameTime().getYear()) * SECONDS_PER_YEAR;
         int daysAsSeconds = (getDayOfYear() - calendar.getEpochInGameTime().getDayOfYear()) * SECONDS_PER_DAY;
         int hoursAsSeconds = (getHour() - calendar.getEpochInGameTime().getHour()) * SECONDS_PER_HOUR;
         int minutesAsSeconds = (getMinutes() - calendar.getEpochInGameTime().getMinutes()) * SECONDS_PER_MINUTE;
@@ -102,11 +101,11 @@ public class MmDateTime {
         newHours %= 24;
 
         int newDays = epoch.getDayOfYear() + daysOfYearSinceEpoch + overflowFromHours;
-        int daysPerYear = calendar.getMonths().stream().max(Comparator.comparingInt(MmMonth::getEndDay)).map(MmMonth::getEndDay).orElse(0) + 1;
+        int daysPerYear = calendar.getMonths().stream().max(Comparator.comparingInt(MmMonth::getEndDay)).map(MmMonth::getEndDay).orElse(1);
         int overflowFromDays = newDays / daysPerYear;
         newDays %= daysPerYear;
 
-        if (newDays < 0) {
+        if (newDays <= 0) {
             overflowFromDays--;
             newDays += daysPerYear;
         }
