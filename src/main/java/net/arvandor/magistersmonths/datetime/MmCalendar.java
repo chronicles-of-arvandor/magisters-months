@@ -35,6 +35,13 @@ public class MmCalendar {
         )).toList();
     }
 
+    public MmCalendar(Duration dayLength, Duration nightLength, Instant epochRealTime, MmDateTime epochInGameTime, List<MmMonth> months) {
+        this.dayLength = dayLength.plus(nightLength);
+        this.epochRealTime = epochRealTime;
+        this.epochInGameTime = epochInGameTime;
+        this.months = months;
+    }
+
     public Instant getEpochRealTime() {
         return epochRealTime;
     }
